@@ -124,7 +124,11 @@ class ZipTool:
             elif event == '-TREE-':
                 self._selected = values['-TREE-'][0]
             elif event == 'Save':
-                path = sg.popup_get_file('Save zip file', save_as=True)
+                path = sg.popup_get_file(
+                    'Save zip file',
+                    save_as=True,
+                    default_path=self._original_path
+                )
                 self.__write_zip(path)
             elif event == 'Move Up':
                 self.__move_up()
