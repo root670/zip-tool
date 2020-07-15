@@ -9,8 +9,7 @@ class ZipTool:
     TITLE = 'zip_tool'
     THEME = 'Dark Amber'
 
-    def __init__(self, path='/Users/wes/zip_tool'):
-        self._path = path
+    def __init__(self):
         self._files = OrderedSet()
         self._selected = None
         self._original_path = None
