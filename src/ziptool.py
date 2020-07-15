@@ -26,9 +26,9 @@ class ZipTool:
     def __write_zip(self, path):
         """Write files into new zip file.
         """
-        if os.path.isfile(path):
-            os.remove(path)
         path_temp = path + '.tmp'
+        if os.path.isfile(path_temp):
+            os.remove(path_temp)
         with ZipFile(self._original_path, 'r') as original:
             with ZipFile(path_temp, 'w', compression=ZIP_DEFLATED, compresslevel=9) as new:
                 for filename in self._files:
@@ -36,6 +36,8 @@ class ZipTool:
                         with new.open(filename, 'w') as in_new:
                             in_new.write(in_original.read())
 
+        if os.path.isfile(path):
+            os.remove(path)
         os.rename(path_temp, path)
 
     def __update_tree(self):
