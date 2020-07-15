@@ -32,7 +32,6 @@ class ZipTool:
         with ZipFile(self._original_path, 'r') as original:
             with ZipFile(path_temp, 'w', compression=ZIP_DEFLATED, compresslevel=9) as new:
                 for filename in self._files:
-                    print('adding {}'.format(filename))
                     with original.open(filename) as in_original:
                         with new.open(filename, 'w') as in_new:
                             in_new.write(in_original.read())
@@ -115,7 +114,6 @@ class ZipTool:
 
         while True:
             event, values = self._window.read()
-            print(event, values)
             if event == sg.WIN_CLOSED or event == 'Exit':
                 break
             elif event == '_FILEBROWSE_':
