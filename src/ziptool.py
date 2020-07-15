@@ -90,7 +90,7 @@ class ZipTool:
                 sg.FileBrowse(
                     key='_FILEBROWSE_',
                     button_text='Open',
-                    file_types=(('Zip Archive', '*.zip')),
+                    file_types=[('Zip Archive', '*.zip')],
                 ),
                 sg.Button('Save', disabled=True, key='Save'),
                 sg.Text('', size=(32, 1), key='numFiles', auto_size_text=True, justification='right')
