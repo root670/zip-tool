@@ -55,34 +55,36 @@ class ZipTool:
         self._window['-TREE-'].Update(treedata)
 
     def __move_up(self):
-        """Move selected file up.
+        """Move selected file(s) up.
         """
-        index = self._files.index(self._selected)
-        files = OrderedSet()
-        if index == 0:
-            return
+        for filename in self._selected:
+            index = self._files.index(filename)
+            files = OrderedSet()
+            if index == 0:
+                return
 
-        if index > 1:
-            files = self._files[:index - 1]
-        files = list(files) + [self._files[index], self._files[index - 1]] + self._files[index + 1:]
+            if index > 1:
+                files = self._files[:index - 1]
+            files = list(files) + [self._files[index], self._files[index - 1]] + self._files[index + 1:]
 
-        self._files = files
+            self._files = files
         self.__update_tree()
 
     def __move_down(self):
-        """Move selected file down.
+        """Move selected file(s) down.
         """
-        index = self._files.index(self._selected)
-        files = OrderedSet()
-        if index == len(self._files) - 1:
-            return
+        for filename in reversed(self._selected):
+            index = self._files.index(filename)
+            files = OrderedSet()
+            if index == len(self._files) - 1:
+                return
 
-        if index > 0:
-            files = self._files[:index]
+            if index > 0:
+                files = self._files[:index]
 
-        files = list(files) + [self._files[index + 1], self._files[index]] + self._files[index + 2:]
+            files = list(files) + [self._files[index + 1], self._files[index]] + self._files[index + 2:]
 
-        self._files = files
+            self._files = files
         self.__update_tree()
 
     def run(self):
@@ -122,7 +124,7 @@ class ZipTool:
                 self.__read_zip(values['_FILEBROWSE_0'])
                 self.__update_tree()
             elif event == '-TREE-':
-                self._selected = values['-TREE-'][0]
+                self._selected = values['-TREE-']
             elif event == 'Save':
                 path = sg.popup_get_file(
                     'Save zip file',
